@@ -8,15 +8,18 @@ var portDecision = process.env.PORT || 5000;
 var connectionString = 'mongodb://localhost:27017/sigma';
 var User = require('./models/user');
 var Secret = require('./models/secret');
+var user = require('./routes/users');
 
 // Static files
 app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
+app.use('/user', user);
+
 admin.initializeApp({
   credential: admin.credential.cert("./server/firebase-service-account.json"),
-  databaseURL: "https://sigma-test-run.firebaseio.com" // replace this line with your URL
+  databaseURL: "https://auth-demo-9d15c.firebaseio.com" // replace this line with your URL
 });
 
 mongoose.connect(connectionString);
@@ -84,4 +87,8 @@ app.get("/privateData", function(req, res){
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
+});
+
+app.post('/addUser', function(req, res) {
+
 });

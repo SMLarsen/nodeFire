@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="sampleApp">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>nodeFire with Authentication</title>
     <!-- AngularJS -->
@@ -17,33 +18,48 @@
 
     <!-- Angular Application with Authentication -->
     <script src="client.js"></script>
-  </head>
-  <body ng-controller="SampleCtrl as sc">
+</head>
+
+<body ng-controller="SampleCtrl as sc">
     <h1>Hi! Log in to get some secret data from the server!</h1>
     <button ng-click="sc.logIn()">Log In</button>
     <button ng-click="sc.logOut()">Log Out</button>
     <div ng-if="sc.secretData.length === 0">Log in to get some secret data.</div>
     <table ng-if="sc.secretData.length > 0">
-      <thead>
-        <tr>
-          <th>
-            Secrecy Level
-          </th>
-          <th>
-            Secret Message
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="secret in sc.secretData">
-          <td>
-            {{secret.secrecyLevel}}
-          </td>
-          <td>
-            {{secret.secretText}}
-          </td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>
+                    Secrecy Level
+                </th>
+                <th>
+                    Secret Message
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="secret in sc.secretData">
+                <td>
+                    {{secret.secrecyLevel}}
+                </td>
+                <td>
+                    {{secret.secretText}}
+                </td>
+            </tr>
+        </tbody>
     </table>
-  </body>
+    <form class="newUser" action="index.html" method="post">
+      <h2>Add New User</h2>
+        <div class="form-group">
+            <label for="email">email: </label>
+            <input type="email" name="email" ng-model="sc.newUser.email">
+        </div>
+        <div class="form-group">
+          <label for="secrecyLevel">Secrecy Level: </label>
+          <input type="number" name="clearanceLevel" min="1" max="5" ng-model="sc.newUser.secrecyLevel">
+        </div>
+        <button type="button" name="addButton" ng-click="sc.addUser()">Add User</button>
+
+    </form>
+</body>
+
 </html>

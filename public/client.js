@@ -3,6 +3,8 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
   var auth = $firebaseAuth();
   var self = this;
 
+  self.newUser = {};
+
   // This code runs whenever the user logs in
   self.logIn = function(){
     auth.$signInWithPopup("google").then(function(firebaseUser) {
@@ -44,4 +46,21 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
       console.log('Logging the user out!');
     });
   };
+
+  self.addUser = function() {
+      console.log('adding user:', self.newUser);
+      $http.post('/user', self.newUser)
+        .then(function(response) {
+          //good
+          console.log('user added', response.data);
+        },
+        function(response) {
+          //error
+          console.log('ERROR adding user', response.data);
+        });
+  };
+
+
+
+
 });
