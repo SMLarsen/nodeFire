@@ -2,6 +2,7 @@ var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function($firebaseAuth, $http) {
     var auth = $firebaseAuth();
     var self = this;
+    var currentUser = null;
 
     self.newUser = {};
 
@@ -21,6 +22,7 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
     auth.$onAuthStateChanged(function(firebaseUser) {
         // firebaseUser will be null if not logged in
         if (firebaseUser) {
+            currentUser = firebaseUser;
             console.log('user:', firebaseUser);
             // This is where we make our call to our server
             firebaseUser.getToken().then(function(idToken) {
@@ -50,7 +52,8 @@ app.controller("SampleCtrl", function($firebaseAuth, $http) {
 
     // Runs when trying to add a new user - returns ok only if requester has appropriate clearance for requestee
     self.addUser = function() {
-        if (firebaseUser) {
+        if (currentUser) {
+            firebaseUser = currentUser;
             console.log('add user:', firebaseUser);
             // This is where we make our call to our server
             var requestedClearance = self.newUser.clearanceLevel;
