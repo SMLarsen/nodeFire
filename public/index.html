@@ -47,19 +47,22 @@
             </tr>
         </tbody>
     </table>
-    <form class="newUser" action="index.html" method="post">
-      <h2>Add New User</h2>
-        <div class="form-group">
-            <label for="email">email: </label>
-            <input type="email" name="email" ng-model="sc.newUser.email">
-        </div>
-        <div class="form-group">
-          <label for="secrecyLevel">Secrecy Level: </label>
-          <input type="number" name="clearanceLevel" min="1" max="5" ng-model="sc.newUser.secrecyLevel">
-        </div>
-        <button type="button" name="addButton" ng-click="sc.addUser()">Add User</button>
+    <div class="newUserContainer" ng-show="sc.secretData.length > 0">
+      <form class="newUser" action="index.html" method="post">
+        <h2>Add New User</h2>
+          <div class="form-group">
+              <label for="email">email: </label>
+              <input type="email" name="email" ng-model="sc.newUser.email">
+          </div>
+          <div class="form-group">
+            <label for="clearanceLevel">Secrecy Level: </label>
+            <input type="number" name="clearanceLevel" min="1" max="5" ng-model="sc.newUser.clearanceLevel">
+          </div>
+          <button type="button" name="addButton" ng-click="sc.addUser()">Add User</button>
 
-    </form>
+      </form>
+
+    </div>
 </body>
 
 </html>
