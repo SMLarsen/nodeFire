@@ -6,6 +6,7 @@ AngularFire with token authentication on Node backend server. This branch uses t
   ```shell
   $ git clone https://github.com/LukeSchlangen/nodeFire
   $ cd nodeFire
+  $ git checkout mongo-authorization
   $ npm install
   ```
 
@@ -33,7 +34,7 @@ AngularFire with token authentication on Node backend server. This branch uses t
   1. Navigate to the [Service Accounts](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk) tab in your project's settings page.
   2. Select your Firebase project.
   3. Copy your `databaseURL` from the `Admin SDK configuration snippet`. The line you need will look like this: `databaseURL: "https://XXXXXXXXX.firebaseio.com"`.
-  4. Navigate to the `server/app.js` file in the node project and replace the databaseURL. Only replace that line. It is inside of the `admin.initializeApp`:
+  4. Navigate to the `server/modules/decoder.js` file in the node project and replace the databaseURL. Only replace that line. It is inside of the `admin.initializeApp`:
 
     ```javascript
     admin.initializeApp({
@@ -53,7 +54,7 @@ AngularFire with token authentication on Node backend server. This branch uses t
   5. Toggle Google to `on`
 
 7. Connect the application to your database
-  1. Create a new mongo database or select one you already use. In `app.js`, change the connection string, currently `var connectionString = 'postgres://localhost:5432/sigma';`, to match the location of your database.
+  1. Create a new mongo database or select one you already use. In `server/modules/database-config.js`, change the connection string, currently `var connectionString = 'postgres://localhost:5432/sigma';`, to match the location of your database.
   2. Copy the queries from the `database.js` file and run them in robomongo or the mongo terminal to create the necessary collections for this project. On the `db.users.insert`, be sure to add your own name and give yourself a clearance_level from 1 to 5. This will determine what data you can see:
 
     ```javascript
@@ -70,10 +71,10 @@ AngularFire with token authentication on Node backend server. This branch uses t
 
 8. Run `npm start` to run your application on `localhost:5000`
 
-##Contributing
+## Contributing
 1. The repository is open to contribution from all interested developers. Kindly send us Pull Requests with explanation as to what changes you have done.
 2. Also, you can write to us by opening an [Issue](https://github.com/LukeSchlangen/nodeFire/issues) and also solve a current issue if possible.
 
-##License
+## License
 
 1. The software is registered under the [MIT License](https://github.com/LukeSchlangen/nodeFire/blob/master/LICENSE.md)
